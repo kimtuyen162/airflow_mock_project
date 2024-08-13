@@ -1,0 +1,14 @@
+services:
+  timescaledb:
+    image: timescale/timescaledb:latest-pg13
+    container_name: postgres
+    restart: always
+    environment:
+      POSTGRES_DB: consumption
+      POSTGRES_USER: tuyen
+      POSTGRES_PASSWORD: 12345
+    ports:
+      - "8432:5432"
+    volumes:
+      - ./data:/var/lib/postgresql/data
+      - /home/tuyen/airflow/airflow/resource:/resource

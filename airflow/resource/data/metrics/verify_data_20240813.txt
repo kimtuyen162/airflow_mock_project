@@ -1,0 +1,5 @@
+
+Verify data loss 20240813
+Number of records in consumption_alcoholic_20240813 table (source/destination): 561/561
+Number of records in consumption_cereals_bakery_20240813 table (source/destination): 374/374
+Number of records in consumption_meats_poultry_20240813 table (source/destination): 748/748
