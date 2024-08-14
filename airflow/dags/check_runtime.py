@@ -10,18 +10,13 @@ default_args = {
     'depends_on_past': False
 }
 
-dag = DAG('check_runtime', default_args = default_args, schedule_interval = '@daily', catchup = False)
-
-wait_for_filtering_customer_consumption_backup = ExternalTaskSensor(
-    task_id = 'wait_for_filtering_customer_consumption_backup',
-    external_dag_id = 'filtering_customer_consumption_backup',
-    external_task_id = 'verify_data.check_data_loss'
-)
+dag = DAG('check_runtime', default_args = default_args, schedule_interval = None, catchup = False)
 
 check_runtime = PythonOperator(
     task_id = 'check_runtime',
     dag = dag,
-    python_callable = _check_runtime
+    python_callable = _check_runtime,
+    op_args = ['filtering_customer_consumption_backup']
 )
 
-wait_for_filtering_customer_consumption_backup >> check_runtime
+check_runtime

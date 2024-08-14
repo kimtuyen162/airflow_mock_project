@@ -1,5 +1,6 @@
 from airflow import DAG
 from airflow.operators.python_operator import PythonOperator
+from airflow.operators.trigger_dagrun import TriggerDagRunOperator
 from datetime import datetime, timedelta
 from airflow.sensors.filesystem import FileSensor
 from airflow.utils.task_group import TaskGroup
@@ -48,5 +49,11 @@ with DAG(
     # Task to verify data in destination and metrics of DAG
     verify_task = verify_data(dag, today)
 
+    trigger_metrics = TriggerDagRunOperator(
+        task_id="trigger_metrics",
+        trigger_dag_id="check_runtime",
+        wait_for_completion=False,
+        deferrable=False
+    )
     # Set the task dependencies
-    check_data_existence >> extract_task >> transform_task >> load_task >> verify_task
+    check_data_existence >> extract_task >> transform_task >> load_task >> verify_task >> trigger_metrics
