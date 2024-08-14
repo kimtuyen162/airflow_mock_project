@@ -1,1 +1,11 @@
+Verify data loss 20240814
+Number of records in consumption_alcoholic_20240814 table (source/destination): 561/561
+Number of records in consumption_cereals_bakery_20240814 table (source/destination): 374/374
+Number of records in consumption_meats_poultry_20240814 table (source/destination): 748/748
 
+Metrics of DAG 20240814
+DAG: filtering_customer_consumption_backup.
+ Start: 2024-08-14 07:56:51.683921+00:00.
+ End: 2024-08-14 07:58:08.460492+00:00
+Task run longest: verify_data with duration 33.726533s
+Task run shortest: extract_specific_data with duration 0.398624s
